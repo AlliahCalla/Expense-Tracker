@@ -21,14 +21,15 @@ function App() {
   const [filterCategory, setFilterCategory] = useState("all");
 
   const categories = ["food", "housing", "utilities", "transport", "entertainment", "salary", "other"];
+  const parseAmount = (value) => Number(value) || 0;
 
   const totalIncome = transactions
     .filter(t => t.type === "income")
-    .reduce((sum, t) => sum + t.amount, 0);
+    .reduce((sum, t) => sum + parseAmount(t.amount), 0);
 
   const totalExpenses = transactions
     .filter(t => t.type === "expense")
-    .reduce((sum, t) => sum + t.amount, 0);
+    .reduce((sum, t) => sum + parseAmount(t.amount), 0);
 
   const balance = totalIncome - totalExpenses;
 
@@ -47,7 +48,7 @@ function App() {
     const newTransaction = {
       id: Date.now(),
       description,
-      amount,
+      amount: parseAmount(amount),
       type,
       category,
       date: new Date().toISOString().split('T')[0],
