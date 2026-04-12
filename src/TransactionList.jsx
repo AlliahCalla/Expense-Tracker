@@ -5,6 +5,7 @@ function TransactionList({
   filterCategory,
   onFilterTypeChange,
   onFilterCategoryChange,
+  onDeleteTransaction,
 }) {
   let filteredTransactions = transactions;
 
@@ -49,6 +50,7 @@ function TransactionList({
             <th>Description</th>
             <th>Category</th>
             <th>Amount</th>
+            <th>Actions</th>
           </tr>
         </thead>
         <tbody>
@@ -63,6 +65,15 @@ function TransactionList({
                 }
               >
                 {transaction.type === "income" ? "+" : "-"}${transaction.amount}
+              </td>
+              <td>
+                <button
+                  type="button"
+                  className="delete-btn"
+                  onClick={() => onDeleteTransaction(transaction.id)}
+                >
+                  Delete
+                </button>
               </td>
             </tr>
           ))}

@@ -46,6 +46,24 @@ function App() {
     setCategory("food");
   };
 
+  const handleDeleteTransaction = (id) => {
+    const transactionToDelete = transactions.find((transaction) => transaction.id === id);
+
+    if (!transactionToDelete) {
+      return;
+    }
+
+    const confirmationMessage = `Delete transaction "${transactionToDelete.description}"?`;
+
+    if (!window.confirm(confirmationMessage)) {
+      return;
+    }
+
+    setTransactions(
+      transactions.filter((transaction) => transaction.id !== id)
+    );
+  };
+
 
   return (
     <div className="app">
@@ -74,6 +92,7 @@ function App() {
         filterCategory={filterCategory}
         onFilterTypeChange={setFilterType}
         onFilterCategoryChange={setFilterCategory}
+        onDeleteTransaction={handleDeleteTransaction}
       />
     </div>
   );
