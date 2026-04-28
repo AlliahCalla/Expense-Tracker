@@ -30,6 +30,8 @@ function TransactionForm({
           Amount
           <input
             type="number"
+            min="0.01"
+            step="0.01"
             placeholder="0.00"
             value={amount}
             onChange={(event) => onAmountChange(event.target.value)}

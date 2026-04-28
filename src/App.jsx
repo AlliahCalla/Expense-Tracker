@@ -25,16 +25,19 @@ function App() {
   const [filterCategory, setFilterCategory] = useState("all");
 
   const categories = ["food", "housing", "utilities", "transport", "entertainment", "salary", "other"];
-  const parseAmount = (value) => Number(value) || 0;
+  const parseAmount = (value) => Number(value);
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (!description || !amount) return;
+    const trimmedDescription = description.trim();
+    const numericAmount = parseAmount(amount);
+
+    if (!trimmedDescription || !Number.isFinite(numericAmount) || numericAmount <= 0) return;
 
     const newTransaction = {
       id: Date.now(),
-      description,
-      amount: parseAmount(amount),
+      description: trimmedDescription,
+      amount: numericAmount,
       type,
       category,
       date: new Date().toISOString().split('T')[0],
