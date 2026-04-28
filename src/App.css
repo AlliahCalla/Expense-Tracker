@@ -1,196 +1,388 @@
+:root {
+  --ink: #18211d;
+  --muted: #67736c;
+  --paper: #fbfaf5;
+  --panel: rgba(255, 255, 251, 0.92);
+  --line: #dce3dd;
+  --income: #107a5b;
+  --expense: #c84636;
+  --accent: #0f8b8d;
+  --gold: #d9982f;
+  --shadow: 0 18px 45px rgba(30, 42, 35, 0.12);
+}
+
 .app {
-  max-width: 800px;
+  width: min(1180px, calc(100% - 32px));
   margin: 0 auto;
-  padding: 20px;
+  padding: 40px 0;
+}
+
+.app-header {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(260px, 420px);
+  gap: 24px;
+  align-items: end;
+  margin-bottom: 24px;
+}
+
+.eyebrow {
+  color: var(--accent);
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 0.16em;
+  margin-bottom: 8px;
+  text-transform: uppercase;
+}
+
+h1,
+h2,
+h3,
+p {
+  margin: 0;
 }
 
 h1 {
-  margin-bottom: 4px;
+  color: var(--ink);
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: clamp(42px, 7vw, 84px);
+  font-weight: 700;
+  line-height: 0.92;
 }
 
 .subtitle {
-  margin-bottom: 20px;
-  color: #666;
+  color: var(--muted);
+  font-size: 16px;
+  line-height: 1.6;
 }
 
 .summary {
-  display: flex;
-  gap: 12px;
-  margin-bottom: 24px;
-  flex-wrap: wrap;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 14px;
+  margin-bottom: 18px;
 }
 
 .summary-card {
-  flex: 1;
-  min-width: 180px;
-  border: 1px solid #ddd;
-  padding: 14px;
-  background: #fff;
+  align-items: center;
+  background: var(--panel);
+  border: 1px solid rgba(255, 255, 255, 0.8);
+  border-radius: 8px;
+  box-shadow: var(--shadow);
+  display: flex;
+  gap: 14px;
+  min-height: 112px;
+  overflow: hidden;
+  padding: 18px;
+  position: relative;
+}
+
+.summary-card::after {
+  background: currentColor;
+  bottom: 0;
+  content: "";
+  height: 4px;
+  left: 0;
+  position: absolute;
+  right: 0;
+}
+
+.summary-card-income {
+  color: var(--income);
+}
+
+.summary-card-expense {
+  color: var(--expense);
+}
+
+.summary-card-balance {
+  color: var(--accent);
+}
+
+.summary-icon {
+  align-items: center;
+  background: color-mix(in srgb, currentColor 12%, white);
+  border: 1px solid color-mix(in srgb, currentColor 28%, white);
+  border-radius: 8px;
+  display: flex;
+  flex: 0 0 54px;
+  font-size: 12px;
+  font-weight: 800;
+  height: 54px;
+  justify-content: center;
+  text-transform: uppercase;
 }
 
 .summary-card h3 {
+  color: var(--muted);
   font-size: 13px;
-  color: #888;
-  margin-bottom: 4px;
+  font-weight: 700;
+  margin-bottom: 6px;
 }
 
-.income-amount {
-  color: green;
-  font-size: 20px;
-  font-weight: bold;
-}
-
-.expense-amount {
-  color: red;
-  font-size: 20px;
-  font-weight: bold;
-}
-
+.income-amount,
+.expense-amount,
 .balance-amount {
-  font-size: 20px;
-  font-weight: bold;
+  color: currentColor;
+  font-size: 28px;
+  font-weight: 850;
+  line-height: 1;
 }
 
-.chart-card {
-  border: 1px solid #ddd;
-  padding: 16px;
-  margin-bottom: 24px;
-  background: #fff;
+.dashboard-grid {
+  align-items: start;
+  display: grid;
+  gap: 18px;
+  grid-template-columns: minmax(0, 1fr) 340px;
+}
+
+.dashboard-main {
+  display: grid;
+  gap: 18px;
+  min-width: 0;
+}
+
+.chart-card,
+.add-transaction,
+.transactions {
+  background: var(--panel);
+  border: 1px solid rgba(255, 255, 255, 0.84);
+  border-radius: 8px;
+  box-shadow: var(--shadow);
+}
+
+.chart-card,
+.transactions {
+  padding: 22px;
+}
+
+.section-heading h2 {
+  color: var(--ink);
+  font-size: 20px;
+  line-height: 1.15;
+}
+
+.section-heading p:not(.eyebrow) {
+  color: var(--muted);
+  font-size: 14px;
+  line-height: 1.5;
+  margin-top: 6px;
 }
 
 .chart-heading {
-  margin-bottom: 16px;
-}
-
-.chart-heading h2 {
-  font-size: 16px;
-  margin-bottom: 4px;
-}
-
-.chart-heading p {
-  color: #666;
-  font-size: 14px;
+  margin-bottom: 18px;
 }
 
 .chart-wrapper {
+  height: 330px;
   width: 100%;
-  height: 320px;
 }
 
 .add-transaction {
-  border: 1px solid #ddd;
-  padding: 16px;
-  margin-bottom: 24px;
-  background: #fff;
-}
-
-.add-transaction h2 {
-  font-size: 16px;
-  margin-bottom: 12px;
+  padding: 20px;
+  position: sticky;
+  top: 18px;
 }
 
 form {
-  display: flex;
-  gap: 8px;
-  flex-wrap: wrap;
+  display: grid;
+  gap: 14px;
+  margin-top: 18px;
 }
 
-form input,
-form select {
-  padding: 8px;
-  border: 1px solid #ccc;
-  font-size: 14px;
+label {
+  color: var(--muted);
+  display: grid;
+  font-size: 12px;
+  font-weight: 800;
+  gap: 7px;
+  text-transform: uppercase;
 }
 
-form input[type="text"] {
-  flex: 2;
+input,
+select {
+  background: #ffffff;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  color: var(--ink);
+  font: inherit;
+  min-height: 44px;
+  outline: none;
+  padding: 10px 12px;
+  text-transform: none;
+  transition: border-color 160ms ease, box-shadow 160ms ease, transform 160ms ease;
+  width: 100%;
 }
 
-form input[type="number"] {
-  flex: 1;
+input:focus,
+select:focus {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 4px rgba(15, 139, 141, 0.14);
 }
 
-form select {
-  flex: 1;
+button {
+  border: 0;
+  border-radius: 8px;
+  cursor: pointer;
+  font: inherit;
 }
 
 form button {
-  padding: 8px 20px;
-  background: #333;
-  color: #fff;
-  border: none;
-  cursor: pointer;
-  font-size: 14px;
+  background: var(--ink);
+  color: #fffef8;
+  font-weight: 800;
+  min-height: 46px;
+  transition: transform 160ms ease, box-shadow 160ms ease, background 160ms ease;
 }
 
-.transactions {
-  margin-bottom: 24px;
+form button:hover {
+  background: #0f1714;
+  box-shadow: 0 14px 28px rgba(24, 33, 29, 0.22);
+  transform: translateY(-1px);
 }
 
-.transactions h2 {
-  font-size: 16px;
-  margin-bottom: 12px;
+.transactions-header {
+  align-items: start;
+  display: flex;
+  gap: 16px;
+  justify-content: space-between;
+  margin-bottom: 16px;
 }
 
 .filters {
   display: flex;
   gap: 8px;
-  margin-bottom: 12px;
 }
 
 .filters select {
-  padding: 6px;
-  border: 1px solid #ccc;
-  font-size: 13px;
+  min-height: 38px;
+  min-width: 140px;
+  padding: 8px 10px;
+}
+
+.table-shell {
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  overflow: hidden;
 }
 
 table {
-  width: 100%;
   border-collapse: collapse;
+  width: 100%;
 }
 
 thead {
-  background: #f5f5f5;
+  background: #eff4f0;
 }
 
-th, td {
-  padding: 10px;
-  text-align: left;
-  border-bottom: 1px solid #ddd;
+th,
+td {
+  border-bottom: 1px solid var(--line);
+  color: var(--ink);
   font-size: 14px;
+  padding: 14px;
+  text-align: left;
+  vertical-align: middle;
 }
 
 th {
-  font-size: 12px;
-  color: #888;
+  color: var(--muted);
+  font-size: 11px;
+  font-weight: 850;
   text-transform: uppercase;
 }
 
-.delete-btn {
-  padding: 4px 10px;
-  background: #eee;
-  border: 1px solid #ccc;
-  cursor: pointer;
-  font-size: 12px;
-  color: #333;
+tbody tr {
+  background: rgba(255, 255, 255, 0.6);
+  transition: background 160ms ease;
 }
 
-@media (max-width: 640px) {
+tbody tr:hover {
+  background: #fffdf6;
+}
+
+tbody tr:last-child td {
+  border-bottom: 0;
+}
+
+.date-cell {
+  color: var(--muted);
+  white-space: nowrap;
+}
+
+.description-cell {
+  font-weight: 750;
+}
+
+.category-pill {
+  background: #f3efe4;
+  border: 1px solid #e4dcc8;
+  border-radius: 999px;
+  color: #6c5631;
+  display: inline-flex;
+  font-size: 12px;
+  font-weight: 800;
+  padding: 5px 9px;
+  text-transform: capitalize;
+}
+
+.delete-btn {
+  background: #fff4f0;
+  border: 1px solid #f0c7bd;
+  color: #a2392b;
+  font-size: 12px;
+  font-weight: 800;
+  padding: 7px 10px;
+  transition: background 160ms ease, color 160ms ease;
+}
+
+.delete-btn:hover {
+  background: #c84636;
+  color: #fff;
+}
+
+.empty-state {
+  border: 1px dashed var(--line);
+  border-radius: 8px;
+  color: var(--muted);
+  padding: 28px;
+  text-align: center;
+}
+
+@media (max-width: 940px) {
+  .app-header,
+  .dashboard-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .add-transaction {
+    position: static;
+  }
+}
+
+@media (max-width: 720px) {
   .app {
-    padding: 16px;
+    width: min(100% - 24px, 1180px);
+    padding: 28px 0;
   }
 
-  .chart-wrapper {
-    height: 260px;
+  .summary {
+    grid-template-columns: 1fr;
   }
 
-  form,
+  .transactions-header,
   .filters {
     flex-direction: column;
   }
 
-  table {
-    display: block;
+  .filters select {
+    min-width: 100%;
+  }
+
+  .table-shell {
     overflow-x: auto;
+  }
+
+  table {
+    min-width: 660px;
   }
 }

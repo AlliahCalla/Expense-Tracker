@@ -68,34 +68,43 @@ function App() {
 
   return (
     <div className="app">
-      <h1>Finance Tracker</h1>
-      <p className="subtitle">Track your income and expenses</p>
+      <header className="app-header">
+        <div>
+          <p className="eyebrow">Personal ledger</p>
+          <h1>Finance Tracker</h1>
+        </div>
+        <p className="subtitle">Track cash flow, spot spending patterns, and keep every transaction in view.</p>
+      </header>
 
       <Summary transactions={transactions} />
-      <SpendingChart transactions={transactions} />
 
-      <TransactionForm
-        description={description}
-        amount={amount}
-        type={type}
-        category={category}
-        categories={categories}
-        onDescriptionChange={setDescription}
-        onAmountChange={setAmount}
-        onTypeChange={setType}
-        onCategoryChange={setCategory}
-        onSubmit={handleSubmit}
-      />
+      <main className="dashboard-grid">
+        <div className="dashboard-main">
+          <SpendingChart transactions={transactions} />
+          <TransactionList
+            transactions={transactions}
+            categories={categories}
+            filterType={filterType}
+            filterCategory={filterCategory}
+            onFilterTypeChange={setFilterType}
+            onFilterCategoryChange={setFilterCategory}
+            onDeleteTransaction={handleDeleteTransaction}
+          />
+        </div>
 
-      <TransactionList
-        transactions={transactions}
-        categories={categories}
-        filterType={filterType}
-        filterCategory={filterCategory}
-        onFilterTypeChange={setFilterType}
-        onFilterCategoryChange={setFilterCategory}
-        onDeleteTransaction={handleDeleteTransaction}
-      />
+        <TransactionForm
+          description={description}
+          amount={amount}
+          type={type}
+          category={category}
+          categories={categories}
+          onDescriptionChange={setDescription}
+          onAmountChange={setAmount}
+          onTypeChange={setType}
+          onCategoryChange={setCategory}
+          onSubmit={handleSubmit}
+        />
+      </main>
     </div>
   );
 }

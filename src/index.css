@@ -1,11 +1,44 @@
 * {
+  box-sizing: border-box;
   margin: 0;
   padding: 0;
-  box-sizing: border-box;
+}
+
+html {
+  background: #ece8dd;
 }
 
 body {
-  font-family: Arial, sans-serif;
-  background-color: #ffffff;
-  color: #333;
+  color: #18211d;
+  font-family: "Aptos", "Segoe UI", Candara, sans-serif;
+  min-height: 100vh;
+}
+
+body::before {
+  background:
+    radial-gradient(circle at 8% 10%, rgba(15, 139, 141, 0.16), transparent 26%),
+    radial-gradient(circle at 88% 18%, rgba(217, 152, 47, 0.18), transparent 28%),
+    linear-gradient(135deg, #f8f3e7 0%, #eef5ee 48%, #f7efe4 100%);
+  content: "";
+  inset: 0;
+  position: fixed;
+  z-index: -2;
+}
+
+body::after {
+  background-image:
+    linear-gradient(rgba(24, 33, 29, 0.035) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(24, 33, 29, 0.035) 1px, transparent 1px);
+  background-size: 34px 34px;
+  content: "";
+  inset: 0;
+  pointer-events: none;
+  position: fixed;
+  z-index: -1;
+}
+
+button,
+input,
+select {
+  font: inherit;
 }

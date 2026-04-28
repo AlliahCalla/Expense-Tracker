@@ -11,13 +11,13 @@ import {
 } from "recharts";
 
 const COLORS = [
-  "#0f766e",
-  "#dc2626",
-  "#2563eb",
-  "#d97706",
-  "#7c3aed",
-  "#059669",
-  "#4b5563",
+  "#0f8b8d",
+  "#f25f5c",
+  "#3b6fd8",
+  "#f6ae2d",
+  "#7d5fff",
+  "#2aa876",
+  "#5c677d",
 ];
 
 function SpendingChart({ transactions }) {
@@ -41,7 +41,8 @@ function SpendingChart({ transactions }) {
   if (chartData.length === 0) {
     return (
       <section className="chart-card">
-        <div className="chart-heading">
+        <div className="section-heading chart-heading">
+          <p className="eyebrow">Analysis</p>
           <h2>Spending by Category</h2>
           <p>Add an expense to see how your spending is distributed.</p>
         </div>
@@ -51,7 +52,8 @@ function SpendingChart({ transactions }) {
 
   return (
     <section className="chart-card">
-      <div className="chart-heading">
+      <div className="section-heading chart-heading">
+        <p className="eyebrow">Analysis</p>
         <h2>Spending by Category</h2>
         <p>Expense totals grouped by category.</p>
       </div>
@@ -62,12 +64,19 @@ function SpendingChart({ transactions }) {
             data={chartData}
             margin={{ top: 8, right: 8, left: 0, bottom: 8 }}
           >
-            <CartesianGrid strokeDasharray="3 3" vertical={false} />
-            <XAxis dataKey="name" />
-            <YAxis tickFormatter={(value) => `$${value}`} />
-            <Tooltip formatter={(value) => [`$${value}`, "Spent"]} />
-            <Legend />
-            <Bar dataKey="total" name="Spent">
+            <CartesianGrid stroke="#dfe7e2" strokeDasharray="4 6" vertical={false} />
+            <XAxis dataKey="name" tickLine={false} axisLine={false} />
+            <YAxis tickFormatter={(value) => `$${value}`} tickLine={false} axisLine={false} />
+            <Tooltip
+              formatter={(value) => [`$${value}`, "Spent"]}
+              contentStyle={{
+                border: "1px solid #d9e2dc",
+                borderRadius: "8px",
+                boxShadow: "0 16px 35px rgba(36, 45, 38, 0.14)",
+              }}
+            />
+            <Legend iconType="circle" />
+            <Bar dataKey="total" name="Spent" radius={[6, 6, 0, 0]}>
               {chartData.map((entry, index) => (
                 <Cell
                   key={entry.name}
